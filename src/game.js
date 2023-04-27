@@ -22,6 +22,8 @@ function setup() {
     for (let ix = 0; ix < cols; ix++) {
       if (Math.random() > 0.9) {
         row.push(2);
+      } else if (Math.random() > 0.95) {
+        row.push(3);
       } else {
         row.push(0);
       }
@@ -45,6 +47,8 @@ function draw() {
       rect(ix * cellSize, iy * cellSize, cellSize);
       if (grid[iy][ix] === 2) {
         text("🌳", ix * cellSize, iy * cellSize + 28);
+      } else if (grid[iy][ix] === 3) {
+        text("🪨", ix * cellSize, iy * cellSize + 28);
       }
     }
   }
