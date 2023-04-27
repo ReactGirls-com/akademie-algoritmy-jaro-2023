@@ -47,10 +47,10 @@ function drawPlayer() {
   if (player1.isMoving && player1.isAlive) {
     damping = Math.abs(Math.sin(millis() / 50)) * 3; // 0 - 3
   }
-  textSize(32);
+  textSize(cellSize);
 
   if (player1.isAlive) {
-    text("🥸", player1.x, player1.y + damping + 28);
+    text("🤡", player1.x, player1.y + damping + 28);
   } else {
     text("💀", player1.x, player1.y + damping + 28);
   }

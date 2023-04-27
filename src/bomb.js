@@ -20,8 +20,21 @@ function detonateBombs() {
   for (const bomb of allBombs) {
     if (bomb.placedAt < millis() - 3000) {
       explosionSound.play();
-      addExplosion(bomb.x, bomb.y);
-      // todo: add more explosions around the bomb
+      // addExplosion(bomb.x, bomb.y);
+      // addExplosion(bomb.x + cellSize, bomb.y);
+      // addExplosion(bomb.x, bomb.y + cellSize);
+      // addExplosion(bomb.x - cellSize, bomb.y);
+      // addExplosion(bomb.x, bomb.y - cellSize);
+
+      const range = 3;
+      for (let i = range / -2; i < range / 2; i++) {
+        for (let j = range / -2; j < range / 2; j++) {
+          addExplosion(
+            bomb.x + cellSize * i + cellSize / 2,
+            bomb.y + cellSize * j + cellSize / 2
+          );
+        }
+      }
     } else {
       newBombs.push(bomb);
     }

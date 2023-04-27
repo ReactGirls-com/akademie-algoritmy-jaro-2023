@@ -1,4 +1,5 @@
 const cellSize = 32;
+const magicNumber = 32;
 const rows = window.innerHeight / cellSize;
 const cols = window.innerWidth / cellSize;
 const grid = [];
@@ -42,6 +43,7 @@ function draw() {
 
   // Draw grid
   fill(61, 84, 62);
+  textSize(cellSize);
   for (let iy = 0; iy < rows; iy++) {
     for (let ix = 0; ix < cols; ix++) {
       rect(ix * cellSize, iy * cellSize, cellSize);
