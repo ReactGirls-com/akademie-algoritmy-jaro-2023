@@ -10,9 +10,7 @@ function movePlayer() {
   if (keyIsDown(RIGHT_ARROW)) {
     player1.x++;
     isMoving = true;
-  }
-
-  if (keyIsDown(LEFT_ARROW)) {
+  } else if (keyIsDown(LEFT_ARROW)) {
     player1.x--;
     isMoving = true;
   }
@@ -20,13 +18,12 @@ function movePlayer() {
   if (keyIsDown(UP_ARROW)) {
     player1.y--;
     isMoving = true;
-  }
-
-  if (keyIsDown(DOWN_ARROW)) {
+  } else if (keyIsDown(DOWN_ARROW)) {
     player1.y++;
     isMoving = true;
   }
 
+  // 32 == SPACE
   if (keyIsDown(32)) {
     if (!bombs.length || bombs[bombs.length - 1].placedAt < millis() - 1000) {
       placeBomb(player1.x, player1.y);
