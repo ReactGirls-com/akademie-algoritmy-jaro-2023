@@ -8,7 +8,7 @@ function placeBomb(x, y) {
 
 function drawBombs() {
   for (const bomb of bombs) {
-    text("💣", bomb.x, bomb.y + 28);
+    text("💣", bomb.x, bomb.y + offsetY);
   }
   drawExplosions();
   cleanupExplosions();
@@ -53,7 +53,7 @@ function addExplosion(x, y) {
 
 function drawExplosions() {
   for (const explosion of explosions) {
-    text("💥", explosion.x, explosion.y + 28);
+    text("💥", explosion.x, explosion.y + offsetY);
   }
 }
 

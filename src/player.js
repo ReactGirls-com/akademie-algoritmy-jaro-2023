@@ -7,19 +7,24 @@ const player1 = {
 
 function movePlayer() {
   let isMoving = false;
+  const speed = Math.floor(deltaTime * 0.2);
+
+  let deltaX = 0;
+  let deltaY = 0;
+
   if (keyIsDown(RIGHT_ARROW)) {
-    player1.x++;
+    deltaX = 1;
     isMoving = true;
   } else if (keyIsDown(LEFT_ARROW)) {
-    player1.x--;
+    deltaX = -1;
     isMoving = true;
   }
 
   if (keyIsDown(UP_ARROW)) {
-    player1.y--;
+    deltaY = -1;
     isMoving = true;
   } else if (keyIsDown(DOWN_ARROW)) {
-    player1.y++;
+    deltaY = 1;
     isMoving = true;
   }
 
@@ -30,7 +35,18 @@ function movePlayer() {
     }
   }
 
+  const destination = positionToCellIdx({
+    x: player1.x + deltaX,
+    y: player1.y + deltaY,
+  });
+  console.log("dest:", destination);
+  if (isCollidingWithObstacle(destination)) {
+    return;
+  }
+
   player1.isMoving = isMoving;
+  player1.x += deltaX * speed;
+  player1.y += deltaY * speed;
 
   if (
     player1.x < 0 ||
@@ -50,8 +66,8 @@ function drawPlayer() {
   textSize(cellSize);
 
   if (player1.isAlive) {
-    text("🤡", player1.x, player1.y + damping + 28);
+    text("🤡", player1.x, player1.y + damping + offsetY);
   } else {
-    text("💀", player1.x, player1.y + damping + 28);
+    text("💀", player1.x, player1.y + damping + offsetY);
   }
 }

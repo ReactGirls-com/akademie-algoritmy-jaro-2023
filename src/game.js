@@ -1,5 +1,6 @@
-const cellSize = 32;
-const magicNumber = 32;
+const cellSize = 50;
+const offsetY = Math.floor(cellSize * 0.875); // Y offset for emojis
+const offsetX = Math.floor(cellSize * -0.0093); // X offset for emojis
 const rows = window.innerHeight / cellSize;
 const cols = window.innerWidth / cellSize;
 const grid = [];
@@ -16,6 +17,7 @@ const grid = [];
 let explosionSound;
 
 function setup() {
+  frameRate(30);
   createCanvas(cols * cellSize, rows * cellSize);
 
   for (let iy = 0; iy < rows; iy++) {
@@ -48,9 +50,9 @@ function draw() {
     for (let ix = 0; ix < cols; ix++) {
       rect(ix * cellSize, iy * cellSize, cellSize);
       if (grid[iy][ix] === 2) {
-        text("🌳", ix * cellSize, iy * cellSize + 28);
+        text("🌳", ix * cellSize, iy * cellSize + offsetY);
       } else if (grid[iy][ix] === 3) {
-        text("🪨", ix * cellSize, iy * cellSize + 28);
+        text("🪨", ix * cellSize, iy * cellSize + offsetY);
       }
     }
   }
