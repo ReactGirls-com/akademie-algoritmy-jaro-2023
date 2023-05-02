@@ -40,21 +40,22 @@ function movePlayer() {
     }
   }
 
+  const margin = 5;
   const destinationLeftTop = positionToCellIdx({
-    x: player1.x + deltaX * speed,
-    y: player1.y + deltaY * speed,
+    x: player1.x + deltaX * speed + margin,
+    y: player1.y + deltaY * speed + margin,
   });
   const destinationRightTop = positionToCellIdx({
-    x: player1.x + cellSize - 1 + deltaX * speed,
-    y: player1.y + deltaY * speed,
+    x: player1.x + cellSize - 1 + deltaX * speed - margin,
+    y: player1.y + deltaY * speed + margin,
   });
   const destinationRightBottom = positionToCellIdx({
-    x: player1.x + cellSize - 1 + deltaX * speed,
-    y: player1.y + cellSize - 1 + deltaY * speed,
+    x: player1.x + cellSize - 1 + deltaX * speed - margin,
+    y: player1.y + cellSize - 1 + deltaY * speed - margin,
   });
   const destinationLeftBottom = positionToCellIdx({
-    x: player1.x + deltaX * speed,
-    y: player1.y + cellSize - 1 + deltaY * speed,
+    x: player1.x + deltaX * speed + margin,
+    y: player1.y + cellSize - 1 + deltaY * speed - margin,
   });
 
   if (
@@ -65,6 +66,8 @@ function movePlayer() {
   ) {
     return;
   }
+
+  // todo: snap player if no key is pressed
 
   player1.isMoving = isMoving;
   player1.x += deltaX * speed;

@@ -33,6 +33,8 @@ function setup() {
     }
     grid.push(row);
   }
+  const player = positionToCellIdx(player1);
+  grid[player.yi][player.xi] = 0;
 
   // Load assets
   explosionSound = loadSound("sound/explosion.mp3");
