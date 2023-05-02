@@ -5,6 +5,11 @@ const player1 = {
   isAlive: true,
 };
 
+/**
+ * This function is called 60 times/second
+ * It should move player based on user input
+ * But only if there's no collision
+ */
 function movePlayer() {
   let isMoving = false;
   const speed = Math.floor(deltaTime * 0.2);
@@ -35,12 +40,29 @@ function movePlayer() {
     }
   }
 
-  const destination = positionToCellIdx({
-    x: player1.x + deltaX,
-    y: player1.y + deltaY,
+  const destinationLeftTop = positionToCellIdx({
+    x: player1.x + deltaX * speed,
+    y: player1.y + deltaY * speed,
   });
-  console.log("dest:", destination);
-  if (isCollidingWithObstacle(destination)) {
+  const destinationRightTop = positionToCellIdx({
+    x: player1.x + cellSize - 1 + deltaX * speed,
+    y: player1.y + deltaY * speed,
+  });
+  const destinationRightBottom = positionToCellIdx({
+    x: player1.x + cellSize - 1 + deltaX * speed,
+    y: player1.y + cellSize - 1 + deltaY * speed,
+  });
+  const destinationLeftBottom = positionToCellIdx({
+    x: player1.x + deltaX * speed,
+    y: player1.y + cellSize - 1 + deltaY * speed,
+  });
+
+  if (
+    isCollidingWithObstacle(destinationLeftTop) ||
+    isCollidingWithObstacle(destinationRightTop) ||
+    isCollidingWithObstacle(destinationRightBottom) ||
+    isCollidingWithObstacle(destinationLeftBottom)
+  ) {
     return;
   }
 
