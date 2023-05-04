@@ -23,6 +23,8 @@ function movePlayer() {
   } else if (keyIsDown(LEFT_ARROW)) {
     deltaX = -1;
     isMoving = true;
+  } else {
+    // deltaY = Math.round(player1.y / cellSize) * cellSize;
   }
 
   if (keyIsDown(UP_ARROW)) {

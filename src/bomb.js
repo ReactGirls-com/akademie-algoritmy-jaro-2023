@@ -2,6 +2,8 @@ let bombs = [];
 let explosions = [];
 
 function placeBomb(x, y) {
+  x = Math.round(x / cellSize) * cellSize;
+  y = Math.round(y / cellSize) * cellSize;
   const bomb = { x, y, placedAt: millis() };
   bombs.push(bomb);
 }
@@ -20,11 +22,6 @@ function detonateBombs() {
   for (const bomb of allBombs) {
     if (bomb.placedAt < millis() - 3000) {
       explosionSound.play();
-      // addExplosion(bomb.x, bomb.y);
-      // addExplosion(bomb.x + cellSize, bomb.y);
-      // addExplosion(bomb.x, bomb.y + cellSize);
-      // addExplosion(bomb.x - cellSize, bomb.y);
-      // addExplosion(bomb.x, bomb.y - cellSize);
 
       const range = 3;
       for (let i = range / -2; i < range / 2; i++) {
@@ -60,6 +57,10 @@ function drawExplosions() {
 function cleanupExplosions() {
   const newExplosions = [];
   for (const ex of explosions) {
+    const gridPointer = positionToCellIdx(ex);
+    if (grid[gridPointer.yi][gridPointer.xi] !== 3) {
+      grid[gridPointer.yi][gridPointer.xi] = 0;
+    }
     if (ex.placedAt < millis() - 1000) {
       // should remove
     } else {

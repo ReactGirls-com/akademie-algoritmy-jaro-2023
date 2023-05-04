@@ -4,6 +4,7 @@ const offsetX = Math.floor(cellSize * -0.0093); // X offset for emojis
 const rows = window.innerHeight / cellSize;
 const cols = window.innerWidth / cellSize;
 const grid = [];
+const enemies = [];
 // const grid = [
 //   [0, 0, 0, 2, 0, 0, 0, 0],
 //   [0, 0, 0, 0, 0, 0, 0, 0],
@@ -23,7 +24,7 @@ function setup() {
   for (let iy = 0; iy < rows; iy++) {
     const row = [];
     for (let ix = 0; ix < cols; ix++) {
-      if (Math.random() > 0.9) {
+      if (Math.random() > 0.7) {
         row.push(2);
       } else if (Math.random() > 0.95) {
         row.push(3);
@@ -35,6 +36,8 @@ function setup() {
   }
   const player = positionToCellIdx(player1);
   grid[player.yi][player.xi] = 0;
+
+  enemies.push(makeEnemy(0, 0));
 
   // Load assets
   explosionSound = loadSound("sound/explosion.mp3");
@@ -66,4 +69,7 @@ function draw() {
   // Handle user input and draw player
   movePlayer();
   drawPlayer();
+
+  // Enemies
+  drawEnemies();
 }
